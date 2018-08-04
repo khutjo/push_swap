@@ -5,137 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/02 08:38:15 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/02 17:09:34 by kmaputla         ###   ########.fr       */
+/*   Created: 2018/08/04 09:29:49 by kmaputla          #+#    #+#             */
+/*   Updated: 2018/08/04 18:17:26 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
-#include <stdio.h>
 
-void	swap(char *str)
-{
-	int		index;
-	char	temp;
-
-	index = 0;
-	index = ft_strlen(str);
-	if (index > 0)
-	{
-		temp = str[0];
-		str[0] = str[1];
-		str[1] = temp;
-	}
-}
-
-void	push(char *a, char *b)
-{
-	int		i;
-	char	temp_a;
-	char	temp_b;
-
-	i = 0;
-	if (!a[0])
-		return ;
-	temp_a = a[0];
-	while (a[++i])
-		a[-1 + i] = a[i];
-	a[--i] = '\0';
-	i = ft_strlen(b);
-	while (i > 0)
-	{
-		temp_b = b[-1 + i];
-		b[i] = temp_b;
-		i--;
-	}
-	b[i] = temp_a;
-}
-
-void	rot_forwards(char *str)
-{
-	int		index;
-	char	temp;
-
-
-	index = 0;
-	temp = str[index];
-	while (str[++index])
-	{
-		str[-1 + index] = str[index];
-	}
-	str[--index] = temp;
-}
-
-void	rot_backwards(char *str)
-{
-	int		index;
-	char	temp;
-
-
-	index = ft_strlen(str);
-	temp = str[--index];
-	while (index > 0)
-	{
-		str[index] = str[-1 + index];
-		index--;
-	} 
-	str[index] = temp;
-}
-
-int		chack(char *stack_a, char *stack_b)
+int	put_to_arrey(int **num_arrey, char *str, int index)
 {
 	int i;
 
-	i = 1;
-	if (stack_b[0])
-		return (1);
-	while (stack_a[i])
-	{
-		if (stack_a[-1 + i] > stack_a[i])
-			return (1);
+	i = 0;
+	while (str[i] == ' ' && str[i])
 		i++;
+	while (str[i])
+	{
+		(*num_arrey)[index++] = ft_atoi(&str[i]);
+		while (str[i] != ' ' && str[i])
+			i++;
+		while (str[i] == ' ' && str[i])
+			i++;
+	}
+	return (index);
+}
+
+int *join(char **str, int *len)
+{
+	int i;
+	int index;
+	int	*num_arrey;
+
+	i = 0;
+	index = 0;
+	while (str[++i])
+		*len += num_of_words(str[i], ' ');
+	num_arrey = (int *)malloc(sizeof(char) * *len);
+	i = 0;
+	while (str[++i])
+		index = put_to_arrey(&num_arrey, str[i], index);
+	return (num_arrey);
+}
+int	varify(char **str)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (str[++i])
+	{
+		j = -1;
+		while (str[i][++j])
+		{
+			if (!ft_isdigit(str[i][j]) && str[i][j] != ' ')
+				return (1);
+		}
 	}
 	return (0);
 }
 
-int main(int k, char **stack_a)
+int	main(int argi, char **args)
 {
-	char *stack_b;
-	char input[4];
+	int len;
+	int index;
+	int	*stack_a;
+	int *stack_b;
 
-	if (k != 2)
+	len = 0;
+	index = -1;
+	if (argi < 2 || varify(args))
 		return (0);
-	stack_b = ft_strnew(ft_strlen(stack_a[1]));
-	printf("%s === %s\n", stack_a[1], stack_b);
-	while (chack(stack_a[1], stack_b))
-	{
-		ft_bzero(input, 4);
-		scanf("%s", input);
-		if (ft_strequ(input, "sa"))
-			swap(stack_a[1]);
-		else if (ft_strequ(input, "sb"))
-			swap(stack_b);
-		else if (ft_strequ(input, "ss"))
-		{
-			swap(stack_a[1]);
-			swap(stack_b);
-		}
-		else if (ft_strequ(input, "pa"))
-			push(stack_a[1], stack_b);
-		else if (ft_strequ(input, "pb"))
-			push(stack_b, stack_a[1]);
-		else if (ft_strequ(input, "ra"))
-			rot_forwards(stack_a[1]);
-		else if (ft_strequ(input, "rb"))
-			rot_forwards(stack_b);
-		else if (ft_strequ(input, "rr"))
-		{
-			rot_forwards(stack_b);
-			rot_forwards(stack_a[1]);
-		}
-		else if (ft_strequ(input, "ab"))
-			rot_forwards(stack_a[1]);
-		printf("%s === %s\n", stack_a[1], stack_b);
-	}
+	stack_a = join(args, &len);
+	stack_b = (int *)malloc(sizeof(int));
+	while (++index < len)
+		printf("== %d ==\n", temp[index]);
+	free(temp);
 	return (0);
-}	
+}
