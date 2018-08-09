@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:16:17 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/06 17:14:14 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/08 09:20:45 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,18 @@ t_lst			*single_str(char *str)
 	run_node = ret_head;
 	while (str[index])
 	{
-		if (ft_isdigit(str[index]))
+		if (str[index] != ' ')
 			run_node->stack = ft_atoi(&str[index]);
-		while (str[index] && ft_isdigit(str[index]))
+		while (str[index] && str[index] != ' ')
 			index++;
-		while (str[index] && !ft_isdigit(str[index]))
+		while (str[index] && str[index] == ' ')
 			index++;
 		run_node = run_node->next;
 	}
 	return (ret_head);
 }
 
-t_lst	*multi_args(char **args, int num_of_args)
+t_lst			*multi_args(char **args, int num_of_args)
 {
 	int		index;
 	t_lst	*run_node;

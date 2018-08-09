@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:15:47 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/06 18:48:06 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/08 09:21:37 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move_ss(t_lst **head)
 	(*head) = node;
 }
 
-void	move_rr(t_lst **head)
+void	move_rrr(t_lst **head)
 {
 	t_lst	*node;
 
@@ -39,7 +39,7 @@ void	move_rr(t_lst **head)
 	node->next = NULL;
 }
 
-void	move_rrr(t_lst	**head)
+void	move_rr(t_lst **head)
 {
 	t_lst	*node_end;
 	t_lst	*node_before_end;
@@ -57,7 +57,8 @@ void	move_rrr(t_lst	**head)
 	node_end->next = (*head);
 	(*head) = node_end;
 }
-void	move_pp(t_lst **head_of_src, t_lst	**head_of_dest)
+
+void	move_pp(t_lst **head_of_src, t_lst **head_of_dest)
 {
 	t_lst	*temp_node;
 
@@ -70,37 +71,29 @@ void	move_pp(t_lst **head_of_src, t_lst	**head_of_dest)
 	}
 }
 
-void	make_a_move(t_lst **stack_a, t_lst **stack_b, int move)
+void	make_a_move(t_lst **stack_a, t_lst **stack_b, char *line)
 {
-	if (move == 0)
-		move_ss(stack_a);
-	if (move == 1)
-		move_ss(stack_b);
-	if (move == 2)
+	(ft_strequ(line, "sa")? move_ss(stack_a) : 0);
+	(ft_strequ(line, "sb")? move_ss(stack_b) : 0);
+	if (ft_strequ(line, "ss"))
 	{
 		move_ss(stack_a);
 		move_ss(stack_b);
 	}
-	if (move == 3)
-		move_rr(stack_a);
-	if (move == 4)
-		move_rr(stack_b);
-	if (move == 5)
+	(ft_strequ(line, "ra")? move_rr(stack_a) : 0);
+	(ft_strequ(line, "rb")? move_rr(stack_b) : 0);
+	if (ft_strequ(line, "rr"))
 	{
 		move_rr(stack_a);
 		move_rr(stack_b);
 	}
-	if (move == 6)
-		move_rrr(stack_a);
-	if (move == 7)
-		move_rrr(stack_b);
-	if (move == 8)
+	(ft_strequ(line, "rra")? move_rrr(stack_a) : 0);
+	(ft_strequ(line, "rrb")? move_rrr(stack_b) : 0);
+	if (ft_strequ(line, "rrr"))
 	{
 		move_rrr(stack_a);
 		move_rrr(stack_b);
 	}
-	if (move == 9)
-		move_pp(stack_a, stack_b);
-	if (move == 10)
-		move_pp(stack_b, stack_a);
+	(ft_strequ(line, "pb")? move_pp(stack_a, stack_b) : 0);
+	(ft_strequ(line, "pa")? move_pp(stack_b, stack_a) : 0);
 }
