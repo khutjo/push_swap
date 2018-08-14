@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   push.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/09 11:19:25 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/09 11:19:33 by kmaputla         ###   ########.fr       */
+/*   Created: 2018/08/13 10:39:16 by kmaputla          #+#    #+#             */
+/*   Updated: 2018/08/14 17:13:09 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef PUSH_H
+# define PUSH_H
+# include "libfile.h"
 
-int	main(void)
-{
-	printf("sa\npb\npb\npb\nra\npa\npa\npa\n");
-	return (0);
-}
+char	*end_to_end(t_lst **stack_a, t_lst **stack_b, char *line);
+
+#endif
+

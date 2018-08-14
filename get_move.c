@@ -6,11 +6,27 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:32:45 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/08 09:05:27 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/14 10:32:11 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfile.h"
+
+int		error_return(void)
+{
+	ft_putstr("Error");
+	return (1);
+}
+
+int		nums_with_signs(char *str, int index)
+{
+	if (str[index] == '-' || str[index] == '+')
+		if (ft_isdigit(str[1 + index]))
+			return (0);
+	if (!ft_isdigit(str[index]))
+		return (1);
+	return (1);
+}
 
 int		varify(char **str, int argi)
 {
@@ -20,22 +36,24 @@ int		varify(char **str, int argi)
 
 	i_y = 0;
 	find_a_digit = 0;
+	if (argi < 2)
+		return (error_return());
 	while (str[++i_y])
 	{
 		i_x = -1;
 		while (str[i_y][++i_x])
 		{
 			if (!ft_isdigit(str[i_y][i_x]) && str[i_y][i_x] != ' ' &&
-						str[i_y][i_x] != '-' && str[i_y][i_x] != '+')
-				return (1);
+					nums_with_signs(str[i_y], i_x))
+				return (error_return());
 			if (str[i_y][i_x] == ' ' && argi > 2)
-				return (1);
+				return (error_return());
 			if (ft_isdigit(str[i_y][i_x]))
 				find_a_digit++;
 		}
 	}
 	if (find_a_digit < 1)
-		return (1);
+		return (error_return());
 	return (0);
 }
 
@@ -81,4 +99,3 @@ void	play_moves(t_lst **stack_a, t_lst **stack_b)
 			return ;
 	}
 }
-	

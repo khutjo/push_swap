@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:15:47 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/08 09:21:37 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/14 10:57:14 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	move_ss(t_lst **head)
 	(*head) = node;
 }
 
-void	move_rrr(t_lst **head)
+void	move_rr(t_lst **head)
 {
 	t_lst	*node;
 
@@ -39,7 +39,7 @@ void	move_rrr(t_lst **head)
 	node->next = NULL;
 }
 
-void	move_rr(t_lst **head)
+void	move_rrr(t_lst **head)
 {
 	t_lst	*node_end;
 	t_lst	*node_before_end;
@@ -71,6 +71,15 @@ void	move_pp(t_lst **head_of_src, t_lst **head_of_dest)
 	}
 }
 
+void	putout(t_lst *stack_a)
+{
+	while (stack_a)
+	{
+		printf("%d\n",stack_a->stack);
+		stack_a = stack_a->next;
+	}
+}
+
 void	make_a_move(t_lst **stack_a, t_lst **stack_b, char *line)
 {
 	(ft_strequ(line, "sa")? move_ss(stack_a) : 0);
@@ -96,4 +105,6 @@ void	make_a_move(t_lst **stack_a, t_lst **stack_b, char *line)
 	}
 	(ft_strequ(line, "pb")? move_pp(stack_a, stack_b) : 0);
 	(ft_strequ(line, "pa")? move_pp(stack_b, stack_a) : 0);
+	putout((*stack_a));
+	putout((*stack_b));
 }
