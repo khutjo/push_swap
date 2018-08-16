@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:15:47 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/14 10:57:14 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:26:52 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,40 +71,29 @@ void	move_pp(t_lst **head_of_src, t_lst **head_of_dest)
 	}
 }
 
-void	putout(t_lst *stack_a)
-{
-	while (stack_a)
-	{
-		printf("%d\n",stack_a->stack);
-		stack_a = stack_a->next;
-	}
-}
-
 void	make_a_move(t_lst **stack_a, t_lst **stack_b, char *line)
 {
-	(ft_strequ(line, "sa")? move_ss(stack_a) : 0);
-	(ft_strequ(line, "sb")? move_ss(stack_b) : 0);
+	(ft_strequ(line, "sa") ? move_ss(stack_a) : 0);
+	(ft_strequ(line, "sb") ? move_ss(stack_b) : 0);
 	if (ft_strequ(line, "ss"))
 	{
 		move_ss(stack_a);
 		move_ss(stack_b);
 	}
-	(ft_strequ(line, "ra")? move_rr(stack_a) : 0);
-	(ft_strequ(line, "rb")? move_rr(stack_b) : 0);
+	(ft_strequ(line, "ra") ? move_rr(stack_a) : 0);
+	(ft_strequ(line, "rb") ? move_rr(stack_b) : 0);
 	if (ft_strequ(line, "rr"))
 	{
 		move_rr(stack_a);
 		move_rr(stack_b);
 	}
-	(ft_strequ(line, "rra")? move_rrr(stack_a) : 0);
-	(ft_strequ(line, "rrb")? move_rrr(stack_b) : 0);
+	(ft_strequ(line, "rra") ? move_rrr(stack_a) : 0);
+	(ft_strequ(line, "rrb") ? move_rrr(stack_b) : 0);
 	if (ft_strequ(line, "rrr"))
 	{
 		move_rrr(stack_a);
 		move_rrr(stack_b);
 	}
-	(ft_strequ(line, "pb")? move_pp(stack_a, stack_b) : 0);
-	(ft_strequ(line, "pa")? move_pp(stack_b, stack_a) : 0);
-	putout((*stack_a));
-	putout((*stack_b));
+	(ft_strequ(line, "pb") ? move_pp(stack_a, stack_b) : 0);
+	(ft_strequ(line, "pa") ? move_pp(stack_b, stack_a) : 0);
 }

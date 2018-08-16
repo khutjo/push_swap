@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 09:32:44 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/08 08:53:17 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/16 17:26:29 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@
 
 typedef	struct		s_lst
 {
+	int				pos;
 	int				stack;
 	struct s_lst	*next;
 }					t_lst;
 
-//void				ft_putstr(char *str);
-//int					ft_isdigit(char	c);
-//int					ft_atoi(const char *s);
+int					error_return(void);
+int					set_order(t_lst	*stack);
 int					varify(char **str, int argi);
 int					check(t_lst *stack_a, t_lst *stack_b, int state);
-void				play_moves(t_lst **stack_a, t_lst **stack_b);
+int					play_moves(t_lst **stack_a, t_lst **stack_b);
 void				make_a_move(t_lst **stack_a, t_lst **stack_b, char *line);
-t_lst				*multi_args(char **str, int num_of_args);
-t_lst				*single_str(char *str);
+t_lst				*multi_args(char **str, int num_of_args, int *state);
+t_lst				*single_str(char *str, int *state);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 12:03:37 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/06/14 17:09:14 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/04 08:43:08 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	int		skip(char const *s, char c, int place, int state)
 	return (place);
 }
 
-static	int		dlen(char const *s, char c)
+int				num_of_words(char const *s, char c)
 {
 	int count;
 	int index;
@@ -52,7 +52,7 @@ static	char	**make(char const *s, char c)
 	index = 0;
 	count = 0;
 	hold = NULL;
-	len = dlen(s, c);
+	len = num_of_words(s, c);
 	if (len != 0 && (hold = (char **)malloc(sizeof(char **) * (1 + len))))
 	{
 		hold[len] = NULL;

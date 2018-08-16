@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 14:08:47 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/07/23 14:43:29 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/03 15:35:51 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static	int		join(char **line)
 	buf[0] = '\0';
 	buf[1] = '\0';
 	size = read(0, buf, 1);
-//	fprintf(stderr, "%c", buf[0]);
-	if (buf[0] == '\n')
+	if (!size || buf[0] == '\n')
 		buf[0] = '\0';
 	if ((*line) == NULL)
 		(*line) = ft_strdup(buf);
@@ -36,7 +35,7 @@ static	int		join(char **line)
 		free((*line));
 		(*line) = temp;
 	}
-	if (buf[0] == '\0')
+	if (ft_strlen(*line) && buf[0] == '\0')
 		return (2);
 	return (size);
 }

@@ -6,19 +6,19 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:32:45 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/14 10:32:11 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:27:04 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libfile.h"
 
-int		error_return(void)
+int	error_return(void)
 {
 	ft_putstr("Error");
 	return (1);
 }
 
-int		nums_with_signs(char *str, int index)
+int	nums_with_signs(char *str, int index)
 {
 	if (str[index] == '-' || str[index] == '+')
 		if (ft_isdigit(str[1 + index]))
@@ -28,7 +28,7 @@ int		nums_with_signs(char *str, int index)
 	return (1);
 }
 
-int		varify(char **str, int argi)
+int	varify(char **str, int argi)
 {
 	int i_y;
 	int i_x;
@@ -57,7 +57,7 @@ int		varify(char **str, int argi)
 	return (0);
 }
 
-int		check(t_lst *stack_a, t_lst *stack_b, int state)
+int	check(t_lst *stack_a, t_lst *stack_b, int state)
 {
 	int i;
 
@@ -85,17 +85,24 @@ int		check(t_lst *stack_a, t_lst *stack_b, int state)
 	return (1);
 }
 
-void	play_moves(t_lst **stack_a, t_lst **stack_b)
+int	play_moves(t_lst **stack_a, t_lst **stack_b)
 {
 	char	*line;
 
 	line = NULL;
-	if (check(*stack_a, *stack_b, 1))
-		return ;
 	while (get_next_line(&line))
 	{
+		if (!ft_strequ(line, "ra") && !ft_strequ(line, "rra") &&\
+				!ft_strequ(line, "rb") && !ft_strequ(line, "rrb") &&\
+				!ft_strequ(line, "rr") && !ft_strequ(line, "rrr") &&\
+				!ft_strequ(line, "pa") && !ft_strequ(line, "pb") &&\
+				!ft_strequ(line, "sa") && !ft_strequ(line, "sb") &&\
+				!ft_strequ(line, "ss"))
+			return (1);
 		make_a_move(stack_a, stack_b, line);
+		free(line);
 		if (check(*stack_a, *stack_b, 1))
-			return ;
+			return (0);
 	}
+	return (0);
 }

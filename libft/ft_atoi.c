@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 08:42:57 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/06/14 16:08:07 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/07 16:14:30 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check(char *str)
 
 	i = -1;
 	sk = 0;
-	skip = "\t\v\f\r\n 0";
+	skip = "\t\v\f\r\n ";
 	while (++i < 7)
 		if (str[sk] == skip[i])
 		{

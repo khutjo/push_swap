@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:16:17 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/08 09:20:45 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:46:26 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,17 @@ static	int		num_of_words_counter(char *str)
 	return (num_of_words);
 }
 
-t_lst			*single_str(char *str)
+static	int		invalid_num(int num, char c, int *state)
+{
+	if (num < 0 && c != '-')
+	{
+		*state = *state + 1;
+		return (1);
+	}
+	return (0);
+}
+
+t_lst			*single_str(char *str, int *state)
 {
 	int		index;
 	t_lst	*run_node;
@@ -76,6 +86,8 @@ t_lst			*single_str(char *str)
 	{
 		if (str[index] != ' ')
 			run_node->stack = ft_atoi(&str[index]);
+		if (invalid_num(run_node->stack, str[index], state))
+			return (ret_head);
 		while (str[index] && str[index] != ' ')
 			index++;
 		while (str[index] && str[index] == ' ')
@@ -85,9 +97,10 @@ t_lst			*single_str(char *str)
 	return (ret_head);
 }
 
-t_lst			*multi_args(char **args, int num_of_args)
+t_lst			*multi_args(char **args, int num_of_args, int *state)
 {
 	int		index;
+	int		space;
 	t_lst	*run_node;
 	t_lst	*ret_head;
 
@@ -97,6 +110,11 @@ t_lst			*multi_args(char **args, int num_of_args)
 	while (args[++index])
 	{
 		run_node->stack = ft_atoi(args[index]);
+		space = 0;
+		while (args[index][space] && args[index][space] == ' ')
+			space++;
+		if (invalid_num(run_node->stack, args[index][space], state))
+			return (ret_head);
 		run_node = run_node->next;
 	}
 	return (ret_head);
