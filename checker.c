@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 10:21:32 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 17:11:23 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 11:38:29 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void	free_stack(t_lst **stack)
 	free(del_temp);
 }
 
+int		clean_up(t_lst **stack_a, t_lst **stack_b, int state)
+{
+	free_stack(stack_a);
+	free_stack(stack_b);
+	if (state)
+		error_return();
+	return (0);
+}
+
 int		main(int argi, char **args)
 {
 	int		state;
@@ -36,7 +45,6 @@ int		main(int argi, char **args)
 	stack_b = NULL;
 	if (argi < 2)
 	{
-		write(1, "\n", 1);
 		return (0);
 	}
 	if (varify(args, argi))
@@ -44,11 +52,9 @@ int		main(int argi, char **args)
 	(argi == 2 ? (stack_a = single_str(args[1], &state))\
 		: (stack_a = multi_args(args, argi, &state)));
 	if (state || set_order(stack_a))
-		return (error_return());
+		return (clean_up(&stack_a, &stack_b, 1));
 	if (play_moves(&stack_a, &stack_b))
-		return (error_return());
+		return (clean_up(&stack_a, &stack_b, 1));
 	check(stack_a, stack_b, 0);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
-	return (0);
+	return (clean_up(&stack_a, &stack_b, 0));
 }

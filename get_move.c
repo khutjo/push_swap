@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:32:45 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 16:27:04 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 12:18:38 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 int	error_return(void)
 {
-	ft_putstr("Error");
+	ft_putstr("Error\n");
 	return (1);
 }
 
 int	nums_with_signs(char *str, int index)
 {
 	if (str[index] == '-' || str[index] == '+')
+	{
+		if (-1 + index >= 0 && str[-1 + index] != ' ')
+			return (1);
 		if (ft_isdigit(str[1 + index]))
 			return (0);
+	}
 	if (!ft_isdigit(str[index]))
 		return (1);
 	return (1);
@@ -98,11 +102,14 @@ int	play_moves(t_lst **stack_a, t_lst **stack_b)
 				!ft_strequ(line, "pa") && !ft_strequ(line, "pb") &&\
 				!ft_strequ(line, "sa") && !ft_strequ(line, "sb") &&\
 				!ft_strequ(line, "ss"))
+		{
+			free(line);
 			return (1);
+		}
 		make_a_move(stack_a, stack_b, line);
 		free(line);
-		if (check(*stack_a, *stack_b, 1))
-			return (0);
 	}
+	if (line)
+		free(line);
 	return (0);
 }

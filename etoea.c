@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 10:43:50 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 16:19:29 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 11:04:40 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ char	*end_to_end_stack_a(t_lst *stack, char *line)
 	see_order(stack, set);
 	if (order(stack) && set[0] < set[1] && set[0] < set[2])
 		return (ft_strcpy(line, "pb"));
-	if (set[0] > set[1])
-		return (ft_strcpy(line, "sa"));
 	if (set[0] < set[1] && set[0] > set[2])
 		return (ft_strcpy(line, "rra"));
 	if (set[0] > set[2])
 		return (ft_strcpy(line, "ra"));
+	if (set[0] > set[1])
+		return (ft_strcpy(line, "sa"));
 	return (line);
 }

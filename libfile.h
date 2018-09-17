@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/05 09:32:44 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 17:26:29 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 10:35:48 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef	struct		s_lst
 {
 	int				pos;
 	int				stack;
+	int				total;
 	struct s_lst	*next;
 }					t_lst;
 

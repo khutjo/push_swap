@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 10:21:11 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 17:12:33 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 11:33:16 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ void	play_algo(t_lst **stack_a, t_lst **stack_b)
 	line = ft_strnew(3);
 	while (!check(*stack_a, *stack_b, 1))
 	{
-		ft_bzero(line, 3);
+		ft_bzero(line, 4);
 		line = end_to_end_stack_a(*stack_a, line);
-		line = end_to_end_stack_b(stack_a, stack_b, line);
-		ft_putstr(line);
-		ft_putchar('\n');
+		line = end_to_end_stack_b(stack_a, stack_b, line, &i);
+		ft_putendl(line);
 		make_a_move(stack_a, stack_b, line);
 		i++;
 	}
@@ -60,7 +59,11 @@ int		main(int argi, char **args)
 	(argi == 2 ? (stack_a = single_str(args[1], &state))\
 		: (stack_a = multi_args(args, argi, &state)));
 	if (state || set_order(stack_a))
+	{
+		free_stack(&stack_a);
+		free_stack(&stack_b);
 		return (error_return());
+	}
 	play_algo(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);

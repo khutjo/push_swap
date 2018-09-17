@@ -6,7 +6,7 @@
 /*   By: kmaputla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 15:16:17 by kmaputla          #+#    #+#             */
-/*   Updated: 2018/08/16 16:46:26 by kmaputla         ###   ########.fr       */
+/*   Updated: 2018/08/20 11:32:48 by kmaputla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_lst			*makes_nodes(int num_of_nodes)
 	while (num_of_nodes-- && (temp_nodes = (t_lst *)malloc(sizeof(t_lst))))
 	{
 		temp_nodes->stack = 0;
+		temp_nodes->total = num_of_nodes;
 		temp_nodes->next = NULL;
 		if (!head)
 		{
@@ -79,7 +80,8 @@ t_lst			*single_str(char *str, int *state)
 	index = 0;
 	num_of_words = num_of_words_counter(str);
 	ret_head = makes_nodes(num_of_words);
-	while (str[index] && !ft_isdigit(str[index]))
+	while (str[index] && !ft_isdigit(str[index]) && str[index] != '-' &&\
+			str[index] != '+')
 		index++;
 	run_node = ret_head;
 	while (str[index])
